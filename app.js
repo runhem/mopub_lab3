@@ -2,9 +2,13 @@ var app = angular.module('app', ["pubnub.angular.service"])
  app.controller('chatCtrl', function($scope, Pubnub) {        
    
 $scope.channel = 'messages-channel';
+$scope.uuid = _.random(100).toString();
+console.log($scope.uuid);
+
    Pubnub.init({
          publish_key: 'pub-c-a18e5f7b-b6da-4175-a7e1-acf318c242a2',
          subscribe_key: 'sub-c-695f3b8a-0ddb-11e6-a9bb-02ee2ddab7fe',
+                  uuid: $scope.uuid
        });
 
 $scope.messages = [];
@@ -18,8 +22,9 @@ $scope.messages = [];
             channel: $scope.channel,
             message: {
                 content: $scope.chatMessage,
-                avatar: 'avatar.png'
-            },
+                sender_uuid: $scope.uuid,
+                date: new Date()
+                            },
             callback: function(m) {
                 console.log(m);
                 $scope.messages.push(m)
@@ -30,6 +35,7 @@ $scope.messages = [];
         $scope.chatMessage = '';
 
     }
+
 $scope.showHistory = function(){
         Pubnub.history({
           count : 20,
@@ -62,6 +68,9 @@ $scope.$on(Pubnub.getMessageEventNameFor($scope.channel), function (ngEvent, m) 
         $scope.messages.push(m)
     });
 });      
-
+// A function to display a nice uniq robot avatar 
+$scope.avatarUrl = function(uuid){
+    return 'http://robohash.org/'+uuid+'?set=set2&bgset=bg2&size=70x70';
+};
 
  });

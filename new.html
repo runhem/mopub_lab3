@@ -11,6 +11,8 @@
 	<script src="http://cdn.pubnub.com/pubnub.min.js"></script>
 	<script src="bower_components/angular/angular.js"></script>
 	<script src="node_modules/pubnub-angular/dist/pubnub-angular-3.1.1.js"></script>
+    <script src="node_modules/lodash/lodash.js"></script>
+
 
 
 	<script src="app.js"></script>
@@ -24,13 +26,15 @@
 
 <body ng-app="app" ng-controller="chatCtrl">
 
-<input ng-model="chatMessage" type="text" placeholder="Type message" id="input">
-<button id="send" class="btn" ng-click="sendMessage()">Send</button>
-<button id="history" class="btn" ng-click="showHistory()">History</button>
+        <input ng-model="chatMessage" type="text" placeholder="Type message" id="input">
+        <button type="submit" id="send" class="btn" ng-click="sendMessage()">Send</button>
+        <button id="history" class="btn" ng-click="showHistory()">History</button>
+
 <ul>
-     <li ng-repeat="message in messages">
-     	<img src="avatar.png" style="width:50px;height:50px;">
-       	<p>{{message.content}}</p>
+    <li ng-repeat="message in messages">
+        <img src="{{avatarUrl(message.sender_uuid)}}" alt="{{message.sender_uuid}}">
+       <span class="title">Anonymous robot #{{ message.sender_uuid }}</span>
+       <p>{{ message.date | date:"MM/dd/yyyy 'at' h:mma"}}</br> {{ message.content }}</p>
      </li>
 </ul> 
 
