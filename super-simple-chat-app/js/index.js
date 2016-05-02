@@ -46,4 +46,32 @@
     });
   }
 
+function orientation (){
+      window.addEventListener('deviceorientation', function(event) { 
+
+        var orientation = event.alpha
+
+        if(orientation >=0 && orientation < 90){
+          var north = document.getElementById("test")
+          north.innerHTML = north.innerHTML + "North";
+        }
+        else if(orientation >=90 && orientation < 180){
+          var west = document.getElementById("test")
+          west.innerHTML = west.innerHTML + "West";
+        }
+        else if(orientation >=180 && orientation < 270){
+          var south = document.getElementById("test")
+          south.innerHTML = south.innerHTML + "South";
+        }
+        else {
+           var east = document.getElementById("test")
+          east.innerHTML = east.innerHTML + "East";
+        }
+        
+
+    });
+
+  }
+
+orientation();
 })();
