@@ -1,21 +1,30 @@
 (function() {
 
+  var p = PUBNUB.init({
+    publish_key: 'pub-c-a18e5f7b-b6da-4175-a7e1-acf318c242a2',
+    subscribe_key: 'sub-c-695f3b8a-0ddb-11e6-a9bb-02ee2ddab7fe'
+  });
+
+  var initOri = "";
+
+
+  function changeChannel(initOri, newChannel, p){
+    if(initOri !== ""){
+    p.unsubscribe({
+      channel: initOri
+    })
+    };
+
   var output = document.querySelector('#output'),
     input = document.querySelector('#input'),
     button = document.querySelector('#button'),
     avatar = document.querySelector('#avatar'),
     presence = document.querySelector('#presence');
-  var channel = 'North';
+    var channel = newChannel;
 
-  var initOri = "North";
 
   // Assign a random avatar in random color
   avatar.className = 'face-' + ((Math.random() * 13 + 1) >>> 0) + ' color-' + ((Math.random() * 10 + 1) >>> 0);
-
-  var p = PUBNUB.init({
-    publish_key: 'pub-c-a18e5f7b-b6da-4175-a7e1-acf318c242a2',
-    subscribe_key: 'sub-c-695f3b8a-0ddb-11e6-a9bb-02ee2ddab7fe'
-  });
 
   p.subscribe({
     channel: channel,
@@ -47,6 +56,7 @@
       x: (input.value = '')
     });
   }
+} // STÄNGER CHANGE CHANNEL
 
 function checkOri (){
       window.addEventListener('deviceorientation', function(event) { 
@@ -64,8 +74,9 @@ function checkOri (){
             ori.innerHTML= "";
             ori.innerHTML = ori.innerHTML + "North";
             style.style.backgroundColor = "#779ECB"
+            changeChannel(initOri, "North", p);
             initOri = "North";
-            this.channel = 'North';
+
           }
         }
           else if(orientation >=90 && orientation < 180){
@@ -73,8 +84,8 @@ function checkOri (){
               ori.innerHTML= "";
               ori.innerHTML = ori.innerHTML + "West";
               style.style.backgroundColor = "#FDFD96"
+              changeChannel(initOri, "West", p);
               initOri = "West";
-              this.channel = "West";
 
             }
           }
@@ -83,8 +94,8 @@ function checkOri (){
               ori.innerHTML= "";
               ori.innerHTML = ori.innerHTML + "South";
               style.style.backgroundColor = "#77DD77";
-              initOri = "South";
-              this.channel = "South";
+            changeChannel(initOri, "South", p);
+            initOri = "South";
 
             }
             
@@ -94,8 +105,8 @@ function checkOri (){
               ori.innerHTML= "";
               ori.innerHTML = ori.innerHTML + "East";
               style.style.backgroundColor = "#FFD1DC";
-              initOri = "East";
-              this.channel = "East";
+            changeChannel(initOri, "East", p);
+            initOri = "East";
 
             }
             
