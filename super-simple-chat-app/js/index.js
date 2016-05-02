@@ -5,7 +5,9 @@
     button = document.querySelector('#button'),
     avatar = document.querySelector('#avatar'),
     presence = document.querySelector('#presence');
-  var channel = 'mchat';
+  this.channel = 'North';
+
+  var initOri = "North";
 
   // Assign a random avatar in random color
   avatar.className = 'face-' + ((Math.random() * 13 + 1) >>> 0) + ' color-' + ((Math.random() * 10 + 1) >>> 0);
@@ -46,32 +48,57 @@
     });
   }
 
-function orientation (){
+function chechOri (){
       window.addEventListener('deviceorientation', function(event) { 
 
         var orientation = event.alpha
-
-        if(orientation >=0 && orientation < 90){
-          var north = document.getElementById("test")
-          north.innerHTML = north.innerHTML + "North";
-        }
-        else if(orientation >=90 && orientation < 180){
-          var west = document.getElementById("test")
-          west.innerHTML = west.innerHTML + "West";
-        }
-        else if(orientation >=180 && orientation < 270){
-          var south = document.getElementById("test")
-          south.innerHTML = south.innerHTML + "South";
-        }
-        else {
-           var east = document.getElementById("test")
-          east.innerHTML = east.innerHTML + "East";
-        }
         
+
+        var ori = document.getElementById("test");
+        
+
+          if(orientation >=0 && orientation < 90){
+
+            if(initOri !== "North"){
+            ori.innerHTML= "";
+            ori.innerHTML = ori.innerHTML + "North";
+            initOri = "North";
+            this.channel = 'North';
+          }
+        }
+          else if(orientation >=90 && orientation < 180){
+            if(initOri !== "West"){
+              ori.innerHTML= "";
+              ori.innerHTML = ori.innerHTML + "West";
+              initOri = "West";
+              this.channel = "West";
+
+            }
+          }
+          else if(orientation >=180 && orientation < 270){
+            if(initOri !== "South"){
+              ori.innerHTML= "";
+              ori.innerHTML = ori.innerHTML + "South";
+              initOri = "South";
+              this.channel = "South";
+
+            }
+            
+          }
+          else {
+            if(initOri !== "East"){
+              ori.innerHTML= "";
+              ori.innerHTML = ori.innerHTML + "East";
+              initOri = "East";
+              this.channel = "East";
+
+            }
+            
+          }
 
     });
 
   }
 
-orientation();
+checkOri();
 })();
