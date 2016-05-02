@@ -2,7 +2,7 @@ var app = angular.module('app', ["pubnub.angular.service"])
 var currentUser = app.value('currentUser', _.random(1000000).toString());
  app.controller('chatCtrl', function($scope, Pubnub, $q, currentUser, $rootScope) {        
 
-$scope.channel = 'messages-channel';
+$scope.channel = 'north';
 
    Pubnub.init({
          publish_key: 'pub-c-a18e5f7b-b6da-4175-a7e1-acf318c242a2',

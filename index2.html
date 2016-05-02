@@ -29,6 +29,7 @@
 
         if(orientation >=0 && orientation < 90){
           $("#test").html("Norr").css({"background-color":"yellow"});
+          navigator.vibrate(1000);
         }
         else if(orientation >=90 && orientation < 180){
           $("#test").html("Väst").css({"background-color":"blue"});
