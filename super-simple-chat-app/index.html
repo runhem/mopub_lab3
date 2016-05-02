@@ -18,23 +18,48 @@
 
   <body class="container">
 
-  <header>
-  <h1>Shake that CHAT</h1>
-  <h2>Powered by Shake that App</h2>
-    <div id="test"></div>
-</header>
-
 <section id="main" role="main">
+  
+  <div id="North" style="display:none"> 
+  <h1>North</h1>  
   <div id="chat">
     <i id="avatar" class="face12"></i>
-    <input type="text" id="input" placeholder="Type your message..."> 
-    <button id="button">Send</button>
+  </div>
+    <input type="text" id="inputNorth" placeholder="Type your message..."> 
+    <button id="buttonNorth">Send</button>
   </div>
 
-  
 
-  <p id="presence"></p>
-  <div id="output"></div>
+   <div id="South" style="display:none">
+     <h1>South</h1>   
+  <div id="chat">
+    <i id="avatar" class="face12"></i>
+  </div>
+      <input type="text" id="inputSouth" placeholder="Type your message..."> 
+    <button id="buttonSouth">Send</button>
+   </div>
+
+
+    <div id="East" style="display:none">
+      <h1>East</h1>   
+    <div id="chat">
+    <i id="avatar" class="face12"></i>
+  </div>
+      <input type="text" id="inputEast" placeholder="Type your message..."> 
+    <button id="buttonEast">Send</button>
+    </div>
+
+    
+     <div id="West" style="display:none">
+       <h1>West</h1>   
+  <div id="chat">
+    <i id="avatar" class="face12"></i>
+  </div>
+         <input type="text" id="inputWest" placeholder="Type your message..."> 
+    <button id="buttonWest">Send</button>
+     </div>
+
+
 </section>
     <script src='http://cdn.pubnub.com/pubnub-3.7.13.min.js'></script>
 
@@ -47,4 +72,5 @@
     
   </body>
 </html>
+
 

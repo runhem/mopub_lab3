@@ -6,6 +6,8 @@
   });
 
   var initOri = "";
+  // Assign a random avatar in random color
+  avatar.className = 'face-' + ((Math.random() * 13 + 1) >>> 0) + ' color-' + ((Math.random() * 10 + 1) >>> 0);
 
 
   function changeChannel(initOri, newChannel, p){
@@ -15,16 +17,14 @@
     })
     };
 
-  var output = document.querySelector('#output'),
-    input = document.querySelector('#input'),
-    button = document.querySelector('#button'),
+  var output = document.querySelector("#" + newChannel),
+    input = document.querySelector("#input" +newChannel),
+    button = document.querySelector("#button" + newChannel),
     avatar = document.querySelector('#avatar'),
     presence = document.querySelector('#presence');
     var channel = newChannel;
 
 
-  // Assign a random avatar in random color
-  avatar.className = 'face-' + ((Math.random() * 13 + 1) >>> 0) + ' color-' + ((Math.random() * 10 + 1) >>> 0);
 
   p.subscribe({
     channel: channel,
@@ -63,17 +63,14 @@ function checkOri (){
 
         var orientation = event.alpha
         
-
-        var ori = document.getElementById("test");
         var style = document.querySelector(".container");
         
 
           if(orientation >=0 && orientation < 90){
 
             if(initOri !== "North"){
-            ori.innerHTML= "";
-            ori.innerHTML = ori.innerHTML + "North";
-            style.style.backgroundColor = "#779ECB"
+            style.style.backgroundColor = "#779ECB";
+            hide("North")
             changeChannel(initOri, "North", p);
             initOri = "North";
 
@@ -81,9 +78,8 @@ function checkOri (){
         }
           else if(orientation >=90 && orientation < 180){
             if(initOri !== "West"){
-              ori.innerHTML= "";
-              ori.innerHTML = ori.innerHTML + "West";
-              style.style.backgroundColor = "#FDFD96"
+              style.style.backgroundColor = "#FDFD96";
+             hide("West");
               changeChannel(initOri, "West", p);
               initOri = "West";
 
@@ -91,9 +87,8 @@ function checkOri (){
           }
           else if(orientation >=180 && orientation < 270){
             if(initOri !== "South"){
-              ori.innerHTML= "";
-              ori.innerHTML = ori.innerHTML + "South";
               style.style.backgroundColor = "#77DD77";
+            hide("South");
             changeChannel(initOri, "South", p);
             initOri = "South";
 
@@ -102,9 +97,10 @@ function checkOri (){
           }
           else {
             if(initOri !== "East"){
-              ori.innerHTML= "";
-              ori.innerHTML = ori.innerHTML + "East";
+        
               style.style.backgroundColor = "#FFD1DC";
+             hide("East");
+
             changeChannel(initOri, "East", p);
             initOri = "East";
 
@@ -112,9 +108,21 @@ function checkOri (){
             
           }
 
+
+
     });
 
   }
+
+function hide (input){
+  if(initOri !== ""){
+             document.getElementById(input).style.display = "block";
+            document.getElementById(initOri).style.display = "none";    
+  }
+  else{
+    document.getElementById(input).style.display = "block";
+  }
+};  
 
 checkOri();
 })();
