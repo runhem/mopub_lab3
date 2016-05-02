@@ -9,7 +9,9 @@
   var currentChat = "";
 
   // Assign a random avatar in random color
+  avatar = document.querySelector('#avatar');
   avatar.className = 'face-' + ((Math.random() * 13 + 1) >>> 0) + ' color-' + ((Math.random() * 10 + 1) >>> 0);
+  
 
 //---------- ChangeChannel begins ---------- 
 
@@ -24,7 +26,6 @@
   var output = document.querySelector("#messages" + newChannel),
     input = document.querySelector("#input" +newChannel),
     button = document.querySelector("#button" + newChannel),
-    avatar = document.querySelector('#avatar'),
     presence = document.querySelector('#presence');
     var channel = newChannel;
 
