@@ -43,6 +43,9 @@ h2 {
   text-transform: uppercase;
 }
 
+.ui-loader 
+  {display: none;}
+
 input[type=text],
 button {
   -webkit-appearance: none;
