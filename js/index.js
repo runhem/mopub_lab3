@@ -128,5 +128,15 @@ function show (newChat){
 //Runs the checkChat function
 checkChat();
 
+
+function masterView(){
+    document.getElementById("North").style.display = "block";
+    document.getElementById("West").style.display = "block";
+    document.getElementById("South").style.display = "block";
+    document.getElementById("East").style.display = "block";
+}
+
+
+
 })();
 
