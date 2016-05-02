@@ -19,7 +19,7 @@
   <body class="container">
 
     <section id="main" role="main">
-      <h1 id="header"> </h1> 
+      <h1 id="header"></h1> 
 
       <div id="chat">
         <i id="avatar" class="face12"></i>
@@ -28,23 +28,26 @@
       <div id="North" style="display:none">  
         <input type="text" id="inputNorth" placeholder="Type your message..."> 
         <button id="buttonNorth">Send</button>
+        <div id="messagesNorth"></div>
       </div>
 
-      <div id="West" style=style="display:none">
+      <div id="West" style="display:none">
         <input type="text" id="inputWest" placeholder="Type your message..."> 
         <button id="buttonWest">Send</button>
+        <div id="messagesWest"></div>     
       </div>
 
       <div id="South" style="display:none">
         <input type="text" id="inputSouth" placeholder="Type your message..."> 
         <button id="buttonSouth">Send</button>
+        <div id="messagesSouth"></div>
       </div>
 
       <div id="East" style="display:none">
         <input type="text" id="inputEast" placeholder="Type your message..."> 
         <button id="buttonEast">Send</button>
+        <div id="messagesEast"></div>
       </div>
-
     </section>
     
   <script src='http://cdn.pubnub.com/pubnub-3.7.13.min.js'></script>
