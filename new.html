@@ -8,6 +8,8 @@
  
     <!-- <link rel="stylesheet" href="style.css"> -->
     <link rel="stylesheet" href="bootstrap/dist/css/bootstrap.min.css">
+    <script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
+    <script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
 	<script src="http://cdn.pubnub.com/pubnub.min.js"></script>
 	<script src="bower_components/angular/angular.js"></script>
 	<script src="node_modules/pubnub-angular/dist/pubnub-angular-3.1.1.js"></script>
@@ -17,7 +19,35 @@
 
 	<script src="app.js"></script>
 
+   
+    <script>
 
+    function orientation (){
+      window.addEventListener('deviceorientation', function(event) { 
+
+        var orientation = event.alpha
+
+        if(orientation >=0 && orientation < 90){
+          $("#test").html("Norr").css({"background-color":"yellow"});
+        }
+        else if(orientation >=90 && orientation < 180){
+          $("#test").html("Väst").css({"background-color":"blue"});
+        }
+        else if(orientation >=180 && orientation < 270){
+          $("#test").html("Syd").css({"background-color":"red"});
+        }
+        else {
+          $("#test").html("Öst").css({"background-color":"purple"});
+        }
+        
+
+    });
+
+  }
+
+orientation();
+
+    </script>
     
 
 
@@ -25,6 +55,7 @@
 </head>
 
 <body ng-app="app" ng-controller="chatCtrl" ng-init="showHistory()">
+<div id="test"></div>
     <div class="message-container">
         <message-list>
             <ul>
