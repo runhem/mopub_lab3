@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Shake that Chat!</title>
+    <meta name="viewport" content="width=320, initial-scale=1, user-scalable=no">
+    <meta charset="utf-8">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+ 
+    <!-- <link rel="stylesheet" href="style.css"> -->
+    <link rel="stylesheet" href="bootstrap/dist/css/bootstrap.min.css">
+	<script src="http://cdn.pubnub.com/pubnub.min.js"></script>
+    <script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
+    <script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+	<script src="bower_components/angular/angular.js"></script>
+	<script src="node_modules/pubnub-angular/dist/pubnub-angular-3.1.1.js"></script>
+    <script src="node_modules/lodash/lodash.js"></script>
+
+
+
+	<script src="app2.js"></script>
+
+   
+    <script>
+
+    function orientation (){
+      window.addEventListener('deviceorientation', function(eventData) { 
+
+        if(orientation >=0 && orientation < 90){
+          $("#test").html("Norr")
+        }
+        else if(orientation >=90 && orientation < 180){
+          $("#test").html("Väst")
+        }
+        else if(orientation >=180 && orientation < 270){
+          $("#test").html("Syd")
+        }
+        else {
+          $("#test").html("Öst")
+        }
+
+    },false);
+
+  }
+
+orientation();
+
+    </script>
+
+
+
+    
+
+
+
+</head>
+
+<body ng-app="app2" ng-controller="chatCtrl">
+<div id="test"></div>
+
+        <input ng-model="chatMessage" type="text" placeholder="Type message" id="input">
+        <button type="submit" id="send" class="btn" ng-click="sendMessage()">Send</button>
+        <button id="history" class="btn" ng-click="showHistory()">History</button>
+
+<ul>
+    <li ng-repeat="message in messages">
+        <img src="{{avatarUrl(message.sender_uuid)}}" alt="{{message.sender_uuid}}">
+       <span class="title">Anonymous robot #{{ message.sender_uuid }}</span>
+       <p>{{ message.date | date:"MM/dd/yyyy 'at' h:mma"}}</br> {{ message.content }}</p>
+     </li>
+</ul> 
+
+</body>
+
+</html>
