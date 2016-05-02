@@ -51,8 +51,7 @@ $scope.showHistory = function(){
             };
           }
         });
-
-      };    
+    };    
 
 
 $scope.subscribeToChat = function(){
@@ -68,11 +67,12 @@ Pubnub.subscribe({
 });
 
 
+
 // Listening to the callbacks
 $scope.$on(Pubnub.getMessageEventNameFor($scope.channel), function (ngEvent, m) {
     $scope.$apply(function () {
         $scope.messages.push(m)
-        console.log("NEW MESSAGE")
+        console.log("NEW MESSAGE");
         //$rootScope.$digest() - om vi hade haft flera filer???
 
     });
@@ -82,8 +82,10 @@ $scope.avatarUrl = function(uuid){
     return 'http://robohash.org/'+uuid+'?set=set2&bgset=bg2&size=70x70';
 };
 
-var scrollToBottom = function() {
-    element.scrollTop(element.prop('scrollHeight'));
-};
+
+
+
+
+
 
  });
