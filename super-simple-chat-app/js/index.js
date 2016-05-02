@@ -5,7 +5,7 @@
     button = document.querySelector('#button'),
     avatar = document.querySelector('#avatar'),
     presence = document.querySelector('#presence');
-  this.channel = 'North';
+  var channel = 'North';
 
   var initOri = "North";
 
@@ -48,13 +48,14 @@
     });
   }
 
-function chechOri (){
+function checkOri (){
       window.addEventListener('deviceorientation', function(event) { 
 
         var orientation = event.alpha
         
 
         var ori = document.getElementById("test");
+        var style = document.querySelector(".container");
         
 
           if(orientation >=0 && orientation < 90){
@@ -62,6 +63,7 @@ function chechOri (){
             if(initOri !== "North"){
             ori.innerHTML= "";
             ori.innerHTML = ori.innerHTML + "North";
+            style.style.backgroundColor = "#779ECB"
             initOri = "North";
             this.channel = 'North';
           }
@@ -70,6 +72,7 @@ function chechOri (){
             if(initOri !== "West"){
               ori.innerHTML= "";
               ori.innerHTML = ori.innerHTML + "West";
+              style.style.backgroundColor = "#FDFD96"
               initOri = "West";
               this.channel = "West";
 
@@ -79,6 +82,7 @@ function chechOri (){
             if(initOri !== "South"){
               ori.innerHTML= "";
               ori.innerHTML = ori.innerHTML + "South";
+              style.style.backgroundColor = "#77DD77";
               initOri = "South";
               this.channel = "South";
 
@@ -89,6 +93,7 @@ function chechOri (){
             if(initOri !== "East"){
               ori.innerHTML= "";
               ori.innerHTML = ori.innerHTML + "East";
+              style.style.backgroundColor = "#FFD1DC";
               initOri = "East";
               this.channel = "East";
 
