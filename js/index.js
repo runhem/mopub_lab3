@@ -88,7 +88,7 @@ function checkChat (event){
         }
         else if(orientation >=90 && orientation < 180){
           if(currentChat !== "East"){
-              style.style.backgroundColor = "#FDFD96";
+              style.style.backgroundColor = "#FFD1DC";
               show("East");
             }
           }
@@ -100,7 +100,7 @@ function checkChat (event){
           }
           else {
             if(currentChat !== "West"){
-              style.style.backgroundColor = "#FFD1DC";
+              style.style.backgroundColor ="#FDFD96";
               show("West");
             }
           }
@@ -136,7 +136,7 @@ function show (newChat){
 
 //Runs the checkChat function
 
-document.getElementById('buttonMaster').onclick = function(){
+document.getElementById('buttonView').onclick = function(){
     window.removeEventListener('deviceorientation', checkChat)
     
     document.querySelector(".container").style.backgroundColor = "#ffffff";
@@ -169,7 +169,41 @@ document.getElementById('buttonMaster').onclick = function(){
 
     document.getElementById("inputEast").style.display = "none";
     document.getElementById("buttonEast").style.display = "none";
+
+    document.getElementById("back").style.display="block";
+    document.getElementById("buttonView").style.display="none";
 };
+
+document.getElementById("back").onclick=function(){
+  window.addEventListener('deviceorientation', checkChat)
+
+    document.getElementById("North").style.display = "none";
+  
+
+    document.getElementById("South").style.display = "none";
+
+
+    document.getElementById("West").style.display = "none";
+
+    document.getElementById("East").style.display = "none";
+
+    document.getElementById("inputNorth").style.display = "block";
+    document.getElementById("buttonNorth").style.display = "block";
+
+    document.getElementById("inputSouth").style.display = "block";
+    document.getElementById("buttonSouth").style.display = "block";
+
+    document.getElementById("inputWest").style.display = "block";
+    document.getElementById("buttonWest").style.display = "block";
+
+    document.getElementById("inputEast").style.display = "block";
+    document.getElementById("buttonEast").style.display = "block";
+
+    document.getElementById("back").style.display="none";
+    document.getElementById("buttonView").style.display="block";
+
+  
+}
 
 })();
 
