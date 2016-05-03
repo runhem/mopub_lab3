@@ -87,9 +87,9 @@ function checkChat (event){
           }
         }
         else if(orientation >=90 && orientation < 180){
-          if(currentChat !== "West"){
+          if(currentChat !== "East"){
               style.style.backgroundColor = "#FDFD96";
-              show("West");
+              show("East");
             }
           }
           else if(orientation >=180 && orientation < 270){
@@ -99,9 +99,9 @@ function checkChat (event){
             } 
           }
           else {
-            if(currentChat !== "East"){
+            if(currentChat !== "West"){
               style.style.backgroundColor = "#FFD1DC";
-              show("East");
+              show("West");
             }
           }
     };
