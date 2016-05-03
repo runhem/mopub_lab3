@@ -68,8 +68,17 @@ window.addEventListener('deviceorientation', checkChat)
 //If the orientation has changed the function switches the color of the 
 //chat room and calles the function "show" with right chat as input value
 function checkChat (event){
-        var orientation = event.alpha;
+        var orientation;
         var style = document.querySelector(".container");
+        if(event.webkitCompassHeading){
+
+            orientation=event.webkitCompassHeading;
+          }
+
+          else{
+            orientation=event.alpha;
+          }
+
 
         if(orientation >=0 && orientation < 90){
           if(currentChat !== "North"){
