@@ -32,7 +32,11 @@
   p.subscribe({
     channel: channel,
     callback: function(m) {
+      if(m.text === ""){
+        console.log("i if!",m.text);
+      }else{
       output.innerHTML = '<p><i class="' + m.avatar + '"></i><span>' + m.text.replace(/[<>]/ig, '') + '</span></p>' + output.innerHTML;
+      }
     },
     presence: function(m) {
       if (m.occupancy > 1) {
