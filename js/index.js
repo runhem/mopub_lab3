@@ -16,12 +16,7 @@
 //---------- ChangeChannel begins ---------- 
 
   //Function that changes chat channel
-  function changeChannel(currentChat, newChannel, p){
-    if(currentChat !== ""){
-      p.unsubscribe({
-      channel: currentChat
-    })
-  };
+  function changeChannel(newChannel, p){
 
   var output = document.querySelector("#messages" + newChannel),
     input = document.querySelector("#input" +newChannel),
@@ -67,12 +62,12 @@
 
 //---------- ChangeChannel ends -----------
 
+window.addEventListener('deviceorientation', checkChat)
 
 //Function that checks the currentChat and the orientation of the phone. 
 //If the orientation has changed the function switches the color of the 
 //chat room and calles the function "show" with right chat as input value
-function checkChat (){
-      window.addEventListener('deviceorientation', function(event) { 
+function checkChat (event){
         var orientation = event.alpha;
         var style = document.querySelector(".container");
 
@@ -100,10 +95,7 @@ function checkChat (){
               show("East");
             }
           }
-
-    });
-
-  }
+    };
 
 // Displays the new chat and hides the currentChat if there is one
 function show (newChat){
@@ -112,35 +104,70 @@ function show (newChat){
     document.getElementById(newChat).style.display = "block";
     document.getElementById(currentChat).style.display = "none";
     //Changes the chat channel and makes the newChat the currentChat
-    changeChannel(currentChat, newChat, p);
+    changeChannel(newChat, p);
+    
+    p.unsubscribe({
+      channel: currentChat
+    })
+
     currentChat = newChat;
     //Display the right chat name in the chat-view
-    document.querySelector('#header').innerHTML = newChat; 
-
+    document.querySelector('#header').innerHTML = newChat;
   }
   else{
     //Displays the new chat
     document.getElementById(newChat).style.display = "block";
     //Changes the chat channel and makes the newChat the currentChat
-    changeChannel(currentChat, newChat, p);
+    changeChannel(newChat, p);
     currentChat = newChat;
     //Display the right chat name in the chat-view
-    document.querySelector('#header').innerHTML = newChat;
   }
-};  
+}; 
+
 
 //Runs the checkChat function
-checkChat();
 
+document.getElementById('buttonMaster').onclick = function(){
+    window.removeEventListener('deviceorientation', checkChat)
+    
+    document.querySelector(".container").style.backgroundColor = "#ffffff";
 
-function masterView(){
     document.getElementById("North").style.display = "block";
-    document.getElementById("West").style.display = "block";
+    document.getElementById("North").style.backgroundColor = "#779ECB";
+    changeChannel("North", p);
+
     document.getElementById("South").style.display = "block";
+    document.getElementById("South").style.backgroundColor = "#77DD77";
+    changeChannel("South", p);
+
+
+    document.getElementById("West").style.display = "block";
+    document.getElementById("West").style.backgroundColor = "#FDFD96";
+    changeChannel("West", p);
+
     document.getElementById("East").style.display = "block";
-}
+    document.getElementById("East").style.backgroundColor ="#FFD1DC";
+    changeChannel("East", p);
 
+    document.getElementById("inputNorth").style.display = "none";
+    document.getElementById("buttonNorth").style.display = "none";
 
+    document.getElementById("inputSouth").style.display = "none";
+    document.getElementById("buttonSouth").style.display = "none";
+
+    document.getElementById("inputWest").style.display = "none";
+    document.getElementById("buttonWest").style.display = "none";
+
+    document.getElementById("inputEast").style.display = "none";
+    document.getElementById("buttonEast").style.display = "none";
+};
 
 })();
+
+
+
+
+
+
+
 
