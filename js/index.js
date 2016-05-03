@@ -80,25 +80,25 @@ function checkChat (event){
           }
 
 
-        if(orientation >=0 && orientation < 90){
+        if(orientation >=315 || orientation < 45){
           if(currentChat !== "North"){
             style.style.backgroundColor = "#779ECB";
             show("North")
           }
         }
-        else if(orientation >=90 && orientation < 180){
+        else if(orientation >=45 && orientation < 135){
           if(currentChat !== "East"){
               style.style.backgroundColor = "#FFD1DC";
               show("East");
             }
           }
-          else if(orientation >=180 && orientation < 270){
+          else if(orientation >=135 && orientation < 225){
             if(currentChat !== "South"){
               style.style.backgroundColor = "#77DD77";
               show("South");
             } 
           }
-          else {
+          else if(orientation >=225 && orientation < 315){
             if(currentChat !== "West"){
               style.style.backgroundColor ="#FDFD96";
               show("West");
@@ -206,7 +206,6 @@ document.getElementById("back").onclick=function(){
 }
 
 })();
-
 
 
 
