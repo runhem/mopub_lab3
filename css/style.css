@@ -46,6 +46,35 @@ h2 {
 .ui-loader 
   {display: none;}
 
+
+.masterView input{
+  display:none;
+}
+
+.masterView button{
+  display: none;
+} 
+
+.hidden{
+  display: none;
+}
+
+#East{
+  background-color: #FFD1DC;
+}
+
+#North{
+  background-color: #779ECB;
+}
+
+#West{
+  background-color: #FDFD96;
+}
+
+#South{
+  background-color: #77DD77;
+}
+
 input[type=text],
 button {
   -webkit-appearance: none;

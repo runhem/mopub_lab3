@@ -16,7 +16,7 @@
 //---------- ChangeChannel begins ---------- 
 
   //Function that changes chat channel
-  function changeChannel(newChannel, p){
+  function initChannel(newChannel, p){
 
   var output = document.querySelector("#messages" + newChannel),
     input = document.querySelector("#input" +newChannel),
@@ -58,7 +58,7 @@
       x: (input.value = '')
     });
   }
-}
+};
 
 //---------- ChangeChannel ends -----------
 
@@ -68,147 +68,99 @@ window.addEventListener('deviceorientation', checkChat)
 //If the orientation has changed the function switches the color of the 
 //chat room and calles the function "show" with right chat as input value
 function checkChat (event){
-        var orientation;
-        var style = document.querySelector(".container");
-        if(event.webkitCompassHeading){
+  var orientation;
+  var style = document.querySelector(".container");
+  if(event.webkitCompassHeading){
+    orientation=event.webkitCompassHeading;
+    }
+  else{
+      orientation=event.alpha;
+    }
 
-            orientation=event.webkitCompassHeading;
-          }
+  if(orientation >=315 || orientation < 45){
+    if(currentChat !== "North"){
+      style.style.backgroundColor = "#779ECB";
+      show("North")
+      }
+    }
+  else if(orientation >=45 && orientation < 135){
+    if(currentChat !== "East"){
+      style.style.backgroundColor = "#FFD1DC";
+      show("East");
+      }
+    }
+  else if(orientation >=135 && orientation < 225){
+    if(currentChat !== "South"){
+    style.style.backgroundColor = "#77DD77";
+    show("South");
+    } 
+  }
+else if(orientation >=225 && orientation < 315){
+    if(currentChat !== "West"){
+    style.style.backgroundColor ="#FDFD96";
+    show("West");
+    }
+  }
 
-          else{
-            orientation=event.alpha;
-          }
+};
 
-
-        if(orientation >=315 || orientation < 45){
-          if(currentChat !== "North"){
-            style.style.backgroundColor = "#779ECB";
-            show("North")
-          }
-        }
-        else if(orientation >=45 && orientation < 135){
-          if(currentChat !== "East"){
-              style.style.backgroundColor = "#FFD1DC";
-              show("East");
-            }
-          }
-          else if(orientation >=135 && orientation < 225){
-            if(currentChat !== "South"){
-              style.style.backgroundColor = "#77DD77";
-              show("South");
-            } 
-          }
-          else if(orientation >=225 && orientation < 315){
-            if(currentChat !== "West"){
-              style.style.backgroundColor ="#FDFD96";
-              show("West");
-            }
-          }
-    };
+initChannel("North", p);
+initChannel("South", p);
+initChannel("West", p);
+initChannel("East", p);
 
 // Displays the new chat and hides the currentChat if there is one
 function show (newChat){
   if(currentChat !== ""){
-    //Displays the new chat and hides the current one
-    document.getElementById(newChat).style.display = "block";
-    document.getElementById(currentChat).style.display = "none";
+    // If old chat, hide it!
+    document.getElementById(currentChat).setAttribute("class", "hidden");
+  }
+    //Displays the new chat
+    document.getElementById(newChat).setAttribute("class", "");
     //Changes the chat channel and makes the newChat the currentChat
     changeChannel(newChat, p);
-    
-    p.unsubscribe({
-      channel: currentChat
-    })
-
     currentChat = newChat;
+    //Display the right chat name in the chat-view
     //Display the right chat name in the chat-view
     document.querySelector('#header').innerHTML = newChat;
-  }
-  else{
-    //Displays the new chat
-    document.getElementById(newChat).style.display = "block";
-    //Changes the chat channel and makes the newChat the currentChat
-    changeChannel(newChat, p);
-    currentChat = newChat;
-    //Display the right chat name in the chat-view
-  }
 }; 
 
 
-//Runs the checkChat function
-
 document.getElementById('buttonView').onclick = function(){
-    window.removeEventListener('deviceorientation', checkChat)
-    
-    document.querySelector(".container").style.backgroundColor = "#ffffff";
+// Remove eventlistener to stop change view according to orientation 
+  window.removeEventListener('deviceorientation', checkChat)
 
-    document.getElementById("North").style.display = "block";
-    document.getElementById("North").style.backgroundColor = "#779ECB";
-    changeChannel("North", p);
-
-    document.getElementById("South").style.display = "block";
-    document.getElementById("South").style.backgroundColor = "#77DD77";
-    changeChannel("South", p);
+// Set all orientationdivs into masterView, hiding buttons and input while displaying messages. + white background     
+  document.querySelector(".container").style.backgroundColor = "#ffffff";
+  document.getElementById("North").setAttribute("class", "masterView");
+  document.getElementById("West").setAttribute("class", "masterView");
+  document.getElementById("South").setAttribute("class", "masterView");
+  document.getElementById("East").setAttribute("class", "masterView");
 
 
-    document.getElementById("West").style.display = "block";
-    document.getElementById("West").style.backgroundColor = "#FDFD96";
-    changeChannel("West", p);
-
-    document.getElementById("East").style.display = "block";
-    document.getElementById("East").style.backgroundColor ="#FFD1DC";
-    changeChannel("East", p);
-
-    document.getElementById("inputNorth").style.display = "none";
-    document.getElementById("buttonNorth").style.display = "none";
-
-    document.getElementById("inputSouth").style.display = "none";
-    document.getElementById("buttonSouth").style.display = "none";
-
-    document.getElementById("inputWest").style.display = "none";
-    document.getElementById("buttonWest").style.display = "none";
-
-    document.getElementById("inputEast").style.display = "none";
-    document.getElementById("buttonEast").style.display = "none";
-
-    document.getElementById("back").style.display="block";
-    document.getElementById("buttonView").style.display="none";
+// Also show back-button and hide change view
+  document.getElementById("back").style.display="block";
+  document.getElementById("buttonView").style.display="none";
 };
 
+
 document.getElementById("back").onclick=function(){
+// Back to normal view and back to listen to device orientation
   window.addEventListener('deviceorientation', checkChat)
 
-    document.getElementById("North").style.display = "none";
-  
+// Back to normal classes and hidden-mode
+  document.getElementById("North").setAttribute("class", "hidden");
+  document.getElementById("West").setAttribute("class", "hidden");
+  document.getElementById("South").setAttribute("class", "hidden");
+  document.getElementById("East").setAttribute("class", "hidden");
 
-    document.getElementById("South").style.display = "none";
+// Hide back button and show change view 
+  document.getElementById("back").style.display="none";
+  document.getElementById("buttonView").style.display="block";
 
-
-    document.getElementById("West").style.display = "none";
-
-    document.getElementById("East").style.display = "none";
-
-    document.getElementById("inputNorth").style.display = "block";
-    document.getElementById("buttonNorth").style.display = "block";
-
-    document.getElementById("inputSouth").style.display = "block";
-    document.getElementById("buttonSouth").style.display = "block";
-
-    document.getElementById("inputWest").style.display = "block";
-    document.getElementById("buttonWest").style.display = "block";
-
-    document.getElementById("inputEast").style.display = "block";
-    document.getElementById("buttonEast").style.display = "block";
-
-    document.getElementById("back").style.display="none";
-    document.getElementById("buttonView").style.display="block";
-
-  
 }
 
 })();
-
-
-
 
 
 
