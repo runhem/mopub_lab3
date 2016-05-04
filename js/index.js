@@ -111,19 +111,18 @@ initChannel("East", p);
 
 // Displays the new chat and hides the currentChat if there is one
 function show (newChat){
+  console.log(currentChat)
   if(currentChat !== ""){
     // If old chat, hide it!
     document.getElementById(currentChat).setAttribute("class", "hidden");
   }
-    //Displays the new chat
+  //Displays the new chat
     document.getElementById(newChat).setAttribute("class", "");
     //Changes the chat channel and makes the newChat the currentChat
-    changeChannel(newChat, p);
     currentChat = newChat;
     //Display the right chat name in the chat-view
-    //Display the right chat name in the chat-view
-    document.querySelector('#header').innerHTML = newChat;
 }; 
+
 
 
 document.getElementById('buttonView').onclick = function(){
@@ -141,6 +140,8 @@ document.getElementById('buttonView').onclick = function(){
 // Also show back-button and hide change view
   document.getElementById("back").style.display="block";
   document.getElementById("buttonView").style.display="none";
+
+  document.getElementById("presence").style.display="none";
 };
 
 
@@ -158,10 +159,10 @@ document.getElementById("back").onclick=function(){
   document.getElementById("back").style.display="none";
   document.getElementById("buttonView").style.display="block";
 
+  document.getElementById("presence").style.display="block";
 }
 
 })();
-
 
 
 
